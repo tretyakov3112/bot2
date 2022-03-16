@@ -25,8 +25,10 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         try {
             SendMessage sendMessage = new SendMessage();
-            sendMessage.setChatId(String.valueOf(update.getMessage().getChatId()));
-            sendMessage.setText("Hi!");
+            Long chatId = update.getMessage().getChatId();
+            String message = String.valueOf(update.getMessage().getText());
+            sendMessage.setChatId(String.valueOf(chatId));
+            sendMessage.setText(chatId+"  "+message);
             execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
