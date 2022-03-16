@@ -1,4 +1,4 @@
-//package com.whiskels.telegram.bot;
+package com.example.demo;//package com.whiskels.telegram.bot;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
