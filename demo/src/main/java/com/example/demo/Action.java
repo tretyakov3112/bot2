@@ -1,65 +1,43 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Action {
-    ArrayList<Integer> countNumber = new ArrayList();
-
-
-    public String action(int n, int k){
-        int count = 0;
-        for (int i = 1; i <= 4; i++) {
-            if ((n % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1))) == (k % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1)))){
-                ++count;
+    public ArrayList action(ArrayList array){
+        Random random = new Random();
+        int index = random.nextInt(array.size());
+        int k = (int) array.get(index);
+        if (k != 0){
+            array.set(index, k-1);
+        } else {
+            for (int i = index; i < array.size() ; i++) {
+                array.remove(index);
             }
         }
-        countNumber.add(countNumber.size(), count);
-        return "Bulls: "+count+"\n"+"Cows: "+ (4-count);
+        return array;
     }
 
-    public int action1(int n, int k){
-        int count = 0;
-        for (int i = 1; i <= 4; i++) {
-            if ((n % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1))) == (k % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1)))){
-                ++count;
-            }
+    int count = 20;
+    Random random = new Random();
+
+    public ArrayList newList(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            arr.add(arr.size(), random.nextInt(10));
         }
-        return count;
+        return arr;
     }
 
-    public int findNumber(int count, int limit, int n){
-        int number = -1;
 
-        for (int k = limit; k <10000 ; k++) {
-            int count1 = 0;
-            for (int i = 1; i <= 4; i++) {
-                if ((n % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1))) == (k % (int)(Math.pow(10,i)))/((int)(Math.pow(10,i-1)))){
-                    ++count1;
-                }
-            }
-            if (count1==count) {
-                number = k;
-                break;
-            }
+
+    public ArrayList stringToArray(String s) {
+        ArrayList arr = new ArrayList();
+        for(int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) >= '0' && s.charAt(i) <= '9')
+                arr.add(Integer.parseInt(String.valueOf(s.charAt(i))));
         }
-        return number;
-
+        return arr;
     }
 
-    public int scam(ArrayList<Integer> cN, ArrayList<Integer> aN){
-        int x = 0;
-        for (int i = 1000; i <10000 ; i++) {
-            int n = findNumber(cN.get(cN.size()-1),i,aN.get(aN.size()-1));
-            for (int j = 0; j < aN.size(); j++) {
-                if (j == aN.size() -1) x = n;
-                if (cN.get(j) == action1(n, aN.get(j))){
-                    continue;
-                } else {
-                    break;
-                }
-
-            }
-        }
-        return x;
-    }
 }
